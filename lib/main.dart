@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mymanga/services/mangalivre.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -106,7 +108,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () async{
+          _incrementCounter;
+          Search().get('one piece');
+
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
