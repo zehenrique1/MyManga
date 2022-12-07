@@ -109,9 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async{
-          _incrementCounter;
-          Search().get('one piece');
-
+          _incrementCounter();
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),

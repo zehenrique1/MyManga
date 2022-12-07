@@ -1,10 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:html/dom.dart' as dom;
-import 'package:html/dom_parsing.dart';
-import 'package:html/html_escape.dart';
 import 'package:html/parser.dart';
-import 'package:flutter/material.dart';
 import 'package:mymanga/models/modelmanga.dart';
 
 Map<String, String> headers = {
@@ -181,6 +178,96 @@ class Search {
       return SearchModel(
           categorys: C.map((e) => CategoryList.fromJson(e)).toList(),
           series: S.map((e) => CategorySeries.fromJson(e)).toList());
+    } catch (e) {
+      return null;
+    }
+  }
+}
+
+class MostReadPeriod {
+  Future<List<MostReadPeriodSerie>?> get(
+      {String type = '', String period = 'week'}) async {
+    http.Response response = await http.get(
+        Uri.parse(
+            'https://mangalivre.net/home/most_read_period?period=$period&type=$type'),
+        headers: headers);
+    try {
+      List<dynamic> jsonMostRead = json.decode(response.body)['most_read'];
+      return jsonMostRead.map((e) => MostReadPeriodSerie.fromJson(e)).toList();
+    } catch (e) {
+      return null;
+    }
+  }
+}
+
+class Featured {
+  Future<List<FeaturedSerie>?> get() async {
+    http.Response response = await http.get(
+        Uri.parse('https://mangalivre.net/home/getFeaturedSeries.json'),
+        headers: headers);
+    try {
+      List<dynamic> jsonFeatured = json.decode(response.body)['featured'];
+      return jsonFeatured.map((e) => FeaturedSerie.fromJson(e)).toList();
+    } catch (e) {
+      return null;
+    }
+  }
+}
+
+class Releases {
+  Future<List<ReleaseSerie>?> get({int page = 1, String type = ''}) async {
+    http.Response response = await http.get(
+        Uri.parse('https://mangalivre.net/home/releases?page=$page&type=$type'),
+        headers: headers);
+    try {
+      List<dynamic> jsonReleases = jsonDecode(response.body)['releases'];
+      return jsonReleases.map((e) => ReleaseSerie.fromJson(e)).toList();
+    } catch (e) {
+      return null;
+    }
+  }
+}
+
+class MostRead {
+  Future<List<MostReadSerie>?> get({int page = 1, String type = ''}) async {
+    http.Response response = await http.get(
+        Uri.parse(
+            'https://mangalivre.net/home/most_read?page=$page&type=$type'),
+        headers: headers);
+    try {
+      List<dynamic> jsonMostRead = json.decode(response.body)['most_read'];
+      return jsonMostRead.map((e) => MostReadSerie.fromJson(e)).toList();
+    } catch (e) {
+      return null;
+    }
+  }
+}
+
+class NewSeries {
+  Future<List<FinishedNewSerie>?> get({String type = ''}) async {
+    http.Response response = await http.get(
+        Uri.parse('https://mangalivre.net/home/getNewSeries?type=$type'),
+        headers: headers);
+    try {
+      List<dynamic> jsonNewSeries = json.decode(response.body)['new_series'];
+      return jsonNewSeries.map((e) => FinishedNewSerie.fromJson(e)).toList();
+    } catch (e) {
+      return null;
+    }
+  }
+}
+
+class FinishedSeries {
+  Future<List<FinishedNewSerie>?> get({String type = ''}) async {
+    http.Response response = await http.get(
+        Uri.parse('https://mangalivre.net/home/getFinishedSeries?type=$type'),
+        headers: headers);
+    try {
+      List<dynamic> jsonFinishedSeries =
+          json.decode(response.body)['finished_series'];
+      return jsonFinishedSeries
+          .map((e) => FinishedNewSerie.fromJson(e))
+          .toList();
     } catch (e) {
       return null;
     }

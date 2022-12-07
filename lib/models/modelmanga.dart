@@ -128,3 +128,118 @@ class SearchModel {
   List<CategoryList?> categorys;
   List<CategorySeries?> series;
 }
+
+class MostReadPeriodSerie {
+  MostReadPeriodSerie(
+      {required this.idSerie,
+      required this.idRelease,
+      required this.idChapter,
+      required this.image,
+      required this.title,
+      required this.number,
+      required this.date,
+      required this.slug});
+
+  MostReadPeriodSerie.fromJson(Map<String, dynamic> json)
+      : idSerie = json['id_serie'],
+        idRelease = json['id_release'],
+        idChapter = json['id_chapter'],
+        image = json['series_image'],
+        title = json['series_name'],
+        number = json['chapter_number'],
+        date = json['date'],
+        slug = json['link'];
+
+  int idSerie;
+  int idRelease;
+  int idChapter;
+  String image;
+  String title;
+  String number;
+  String date;
+  String slug;
+}
+
+class FeaturedSerie {
+  FeaturedSerie(
+      {required this.idSerie, required this.title, required this.image});
+
+  FeaturedSerie.fromJson(Map<String, dynamic> json)
+      : idSerie = json['id_serie'],
+        title = json['series_name'],
+        image = json['featured_image'];
+
+  int idSerie;
+  String title;
+  String image;
+}
+
+class ReleaseSerie {
+  ReleaseSerie(
+      {required this.date,
+      required this.dateString,
+      required this.title,
+      required this.idSerie,
+      required this.image,
+      required this.qtdChapters});
+
+  ReleaseSerie.fromJson(Map<String, dynamic> json)
+      : date = json['date'],
+        dateString = json['dateString'],
+        title = json['name'],
+        idSerie = json['id_serie'],
+        image = json['image'],
+        qtdChapters = json['range'];
+
+  String date;
+  String dateString;
+  String title;
+  int idSerie;
+  String image;
+  String qtdChapters;
+}
+
+class MostReadSerie {
+  MostReadSerie(
+      {required this.idSerie, required this.title, required this.image});
+
+  MostReadSerie.fromJson(Map<String, dynamic> json)
+      : idSerie = json['id_serie'],
+        title = json['serie_name'],
+        image = json['cover'];
+
+  int idSerie;
+  String title;
+  String image;
+}
+
+class FinishedNewSerie {
+  FinishedNewSerie(
+      {required this.idSerie,
+      required this.title,
+      required this.description,
+      required this.image,
+      required this.score,
+      required this.qtdChapters,
+      required this.author,
+      required this.categorys});
+
+  FinishedNewSerie.fromJson(Map<String, dynamic> json)
+      : idSerie = json['id_serie'],
+        title = json['name'],
+        description = json['description'],
+        image = json['image'],
+        score = json['score'],
+        qtdChapters = json['chapters'],
+        author = json['author'],
+        categorys = json['categories'];
+
+  int idSerie;
+  String title;
+  String description;
+  String image;
+  String score;
+  int qtdChapters;
+  String author;
+  List<dynamic> categorys;
+}
